@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from '@material-ui/icons/Search';
 import Button from "@material-ui/core/Button";
-
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 
@@ -15,8 +14,9 @@ const API_GET_PICTURES = "https://tsmiscwebapi.azurewebsites.net/api/qb/GetSBSIF
 
 function Images(){
     const [images, setImages] = useState([]);
-    
-    const getImages = (id) => {
+    const [searchId, setSearchId] = useState("");
+
+    const updateImages = (id) => {
         axios.get(API_GET_PICTURES
                     + "/" + id
                     + "/10000/1")
@@ -26,7 +26,7 @@ function Images(){
                 res.data.Data.forEach(img => {
                     apiImages.push({
                         original: img.ImageUrl,
-                        originalHeight: 400,
+                        originalHeight: 600,
 
                         thumbnail: img.ThumbImageUrl,
                         thumbnailHeight: 100,
@@ -38,9 +38,13 @@ function Images(){
             })
     }        
     
-    useEffect(() => {
-        getImages(2);
-    }, [])
+    const handleSearchClick = (event) => {
+        updateImages(searchId);
+    }
+
+    const handleSearchInput = (event) => {
+        setSearchId(event.target.value);
+    }
 
     return(
         <>
@@ -49,17 +53,25 @@ function Images(){
             </Container>
 
             <Container className="baseContainer" style={{ textAlign: "center" }}><Paper>
-                <div className="inputContainer" style={{ alignItems: "center" }}>
-                    <TextField variant="outlined" size="small" label="Search by ID"></TextField>
-                    <Button variant="contained" color="primary"><SearchIcon/></Button>
+                <div className="inputContainer" style={{ padding: 20 }}>
+                    <TextField variant="outlined" size="small" label="Search by ID"
+                        onChange={handleSearchInput}/>
+                    <Button variant="contained" color="primary"
+                        onClick={handleSearchClick}>
+                        <SearchIcon/>
+                    </Button>
                 </div>
             </Paper></Container>
 
-            <Container className="baseContainer"><Paper>
-                <div style={{ padding: 30 }}>
-                <ImageGallery items={images}/>
-                </div>
-            </Paper></Container>
+            {/* Only show gallery if there are images */}
+            {(images.length !== 0)
+            ? ( <Container className="baseContainer"><Paper>
+                    <div className="galleryContainer">
+                        <ImageGallery items={images}/>
+                    </div>
+                </Paper></Container>)
+            : (<></>) }
+            
         </>
     )
 }
