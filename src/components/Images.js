@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from "react";
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 
@@ -7,22 +9,32 @@ import Paper from "@material-ui/core/Paper";
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 
-const images = [
-    {
-        original: 'https://picsum.photos/id/1018/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1018/250/150/',
-    },
-    {
-        original: 'https://picsum.photos/id/1015/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1015/250/150/',
-    },
-    {
-        original: 'https://picsum.photos/id/1019/1000/600/',
-        thumbnail: 'https://picsum.photos/id/1019/250/150/',
-    },
-];
+import axios from "axios";
+const URL = "https://tsmiscwebapi.azurewebsites.net/api/qb/GetSBSIFPictures/1/10000/1";
 
 function Images(){
+    const [images, setImages] = useState([]);
+    
+    const getImages = (id) => {
+        axios.get(URL)
+            .then(res => {
+                let apiImages = [];
+
+                res.data.Data.forEach(img => {
+                    apiImages.push({
+                        orignal: img.ImageUrl,
+                        thumbnail: img.ThumbImageUrl,
+                    })
+                })
+
+                setImages(apiImages);
+            })
+    }
+
+    useEffect(() => {
+        getImages();
+    }, [])
+
     return(
         <>
             <AppBar position="static">
