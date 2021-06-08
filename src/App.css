@@ -1,16 +1,40 @@
 html{
 	font-family: "Roboto";
-	background-color: rgb(236, 236, 236);
+	background-color: black;
 }
 
-.baseContainer{
-	padding: 10px;
+.container {
+	width: 100%;
+	height: 100%;
+	margin: auto;
 }
 
-.inputContainer{
-	padding: 10px;
+.sidebar{
+	height: 100%;	/* Full height */
+	position: fixed;
+	top: 0;
+	left: 0;
+    bottom: 0;
+	width: 15%;
+	/* overflow-y: scroll; */
+	float: left;
+	padding: 300;
+
+	color: white;
+	background-color: rgb(44, 44, 44);
 }
 
-.galleryContainer{
-	padding: 30px;
+.main{
+	height: 100%;
+	position: fixed;
+	top: 0;
+    bottom: 0;
+	margin-left: 15%;
+	width: 85%;
+	/* border: 2px solid red; */
+
+	color: white;
+	text-align: center;
+	vertical-align: middle;
 }
+

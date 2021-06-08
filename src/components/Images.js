@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import Container from "@material-ui/core/Container";
-import Paper from "@material-ui/core/Paper";
-
-import ImageGallery from 'react-image-gallery';
-import "react-image-gallery/styles/css/image-gallery.css";
-
-import Gallery from "react-grid-gallery";
+import Gallery from "react-photo-gallery";
+import Viewer from "react-viewer";
 
 import axios from "axios";
 const API_GET_SBS = "https://tsmiscwebapi.azurewebsites.net/api/qb/GetSBSIFPictures";
@@ -14,10 +9,16 @@ const API_GET_TST = "https://tsmiscwebapi.azurewebsites.net/api/timesheet/GetTim
 
 function Images(){
 	const [images, setImages] = useState([]);
-	
-	// Retrieves pictures from API and updates images state array
+	const [display, setDisplay] = useState("Please click on a photo to view");
+
+	const handlePhotoClick = (event, obj) => {
+		setDisplay(obj.index)
+	}
+
+	// Retrieves images from API on load
 	useEffect(() => {
-		let search = window.location.search;
+		// Parse URL
+		let search = window.location.search;	// ?app={type}&p1={id}
 		let type = search.substring(5, 8);
 		let id = search.substring(12);
 
@@ -30,13 +31,8 @@ function Images(){
 			res.data.Data.forEach(img => {
 				apiImages.push({
 					src: img.ImageUrl,
-					
-					original: img.ImageUrl,
-					originalHeight: 800,
-					
-					thumbnail: img.ThumbImageUrl,
-					thumbnailHeight: 100,
-					thumbnailWidth: 100,
+					width: 2,
+					height: 1,
 				})
 			})
 			
@@ -46,35 +42,41 @@ function Images(){
 	}, [])
 	
 	return(
-		<>
-			<Container className="baseContainer" maxWidth={false}>
+		<div className="container">
+			<div className="sidebar">
 				<h1>Images</h1>
-			</Container>
-
-			{/* Only show gallery if there are images */}
-			{(images.length !== 0)
-			? ( 
-				<>
-				<Container className="baseContainer" maxWidth={false}>
-					<Paper>
-						<div className="galleryContainer">
-							<ImageGallery items={images}
-								thumbnailPosition="left"
-								showNav={false}
-								showPlayButton={false}
-								showFullscreenButton={false}/>
-						</div>
-					</Paper>
-				</Container>
 				
-				<Container className="baseContainer" maxWidth={false}><Paper>					
-					<Gallery images={images}/>
-				</Paper></Container>
-				</>
-				)
-			: (<></>) }
+				{/* Only show gallery if there are images */}
+				{(images.length !== 0)
+					? ( <Gallery photos={images}
+						columns={1}
+						direction={"column"}
+						onClick={handlePhotoClick}/>
+						
+						)
+					: (<></>) }
+					
+			</div>
 			
-		</>
+			
+			<div className="main">
+				<h1>{display}</h1>
+				{(images.length !== 0)
+				? (
+				<Viewer
+					visible={true}
+					images={images}
+					zoomable={false}
+					scalable={false}
+					noClose={true}
+					changeable={false}
+					zoomSpeed={0.75}
+					minScale={1}/>
+				)
+				: (<></>)}
+
+			</div>
+		</div>
 	)
 }
 
