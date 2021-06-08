@@ -61,11 +61,11 @@ function Images(){
 	
 	return(
 		<>
-			<Container>
+			<Container className="baseContainer" maxWidth={false}>
 				<h1>Images</h1>
 			</Container>
 
-			<Container className="baseContainer" style={{ textAlign: "center" }}><Paper>
+			<Container className="baseContainer" style={{ textAlign: "center" }} maxWidth={false}><Paper>
 				<div className="inputContainer" style={{ padding: 20 }}>
 					<TextField variant="outlined"
 						label="Search by ID"
@@ -88,8 +88,8 @@ function Images(){
 			{/* Only show gallery if there are images */}
 			{(images.length !== 0)
 			? ( 
-				{/*
-				<Container className="baseContainer">
+				<>
+				<Container className="baseContainer" maxWidth={false}>
 					<Paper>
 						<div className="galleryContainer">
 							<ImageGallery items={images}
@@ -100,12 +100,11 @@ function Images(){
 						</div>
 					</Paper>
 				</Container>
-				*/},
-				<Container className="baseContainer">    
-					<div className="galleryContainer">
-						<Gallery images={images}/>
-					</div>
-				</Container>
+				
+				<Container className="baseContainer" maxWidth={false}><Paper>					
+					<Gallery images={images}/>
+				</Paper></Container>
+				</>
 				)
 			: (<></>) }
 			
