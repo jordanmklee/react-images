@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
+import Select from '@material-ui/core/Select';
+import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -12,14 +14,20 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import Gallery from "react-grid-gallery";
 
 import axios from "axios";
-const API_GET_PICTURES = "https://tsmiscwebapi.azurewebsites.net/api/qb/GetSBSIFPictures/";
+const API_GET_SBS = "https://tsmiscwebapi.azurewebsites.net/api/qb/GetSBSIFPictures/";
+const API_GET_TST = "https://tsmiscwebapi.azurewebsites.net/api/timesheet/GetTimesheetPictures/";
 
 function Images(){
     const [images, setImages] = useState([]);
     const [searchId, setSearchId] = useState("");
+    const [type, setType] = useState("SBS");
+
+    const handleChangeType = (event) => {
+        setType(event.target.value);
+    }
 
     const updateImages = (id) => {
-        axios.get(API_GET_PICTURES
+        axios.get((type === "SBS" ? API_GET_SBS : API_GET_TST)
                     + "/" + id
                     + "/10000/1")
             .then(res => {
@@ -58,9 +66,18 @@ function Images(){
 
             <Container className="baseContainer" style={{ textAlign: "center" }}><Paper>
                 <div className="inputContainer" style={{ padding: 20 }}>
-                    <TextField variant="outlined" size="small"
+                    <TextField variant="outlined"
                         label="Search by ID"
                         onChange={handleSearchInput}/>
+                    
+                    <Select
+                        variant="outlined"
+                        value={type}
+                        onChange={handleChangeType}>
+                        <MenuItem value="SBS">SBS</MenuItem>
+                        <MenuItem value="TST">TST</MenuItem>
+                    </Select>
+                    
                     <Button variant="contained" color="primary" size="large"
                         onClick={handleSearchClick}>
                         <SearchIcon/>
