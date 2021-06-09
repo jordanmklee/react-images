@@ -9,7 +9,6 @@ const API_GET_TST = "https://tsmiscwebapi.azurewebsites.net/api/timesheet/GetTim
 
 function Images(){
 	const [images, setImages] = useState([]);
-	const [display, setDisplay] = useState("Please click on a photo to view");
 	const [viewerIndex, setViewerIndex] = useState(0);
 
 	const handlePhotoClick = (event, obj) => {
@@ -44,13 +43,13 @@ function Images(){
 	return(
 		<div>
 			<div className="sidebar">
-				<h1>Images</h1>
-				
+				<h2>Images</h2>
 				{/* Only show gallery if there are images */}
 				{(images.length !== 0)
 					? 	(	<Gallery photos={images}
 								columns={1}
 								direction={"column"}
+								margin={10}
 								onClick={handlePhotoClick}/>	)
 					:	(<></>)	}
 			</div>
@@ -71,7 +70,7 @@ function Images(){
 							noClose={true}
 							changeable={false}
 							noNavbar={true}/>	)
-				:	(	<h1>{display}</h1>	)}
+				:	(	<></>	)}
 
 			</div>
 		</div>
