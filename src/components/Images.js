@@ -49,7 +49,7 @@ function Images(){
 	
 	return(
 		(gridView)
-			? <GridView/>
+			? <GridView title={title} images={images}/>
 			: <ListView title={title} images={images} handleChangeView={handleChangeView}/>
 	)
 }

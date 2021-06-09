@@ -13,6 +13,8 @@ function ListView(props){
     const handlePhotoClick = (event, obj) => {
         setViewerIndex(obj.index);
     }
+
+
     return(
         <div className="page-container">
 			<div className="sidebar">

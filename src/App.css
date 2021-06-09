@@ -4,6 +4,11 @@ html{
 
 body{
 	margin: 0;
+	background-color: black;
+}
+
+h2{
+	color: white;
 }
 
 .page-container {
@@ -20,7 +25,6 @@ body{
 	flex: 1;
 	height: 100vh;
 	overflow-y: scroll;
-	background-color: black;
 }
 ::-webkit-scrollbar {
     width: 0px;
@@ -28,7 +32,6 @@ body{
 }
 
 .sidebar-title{
-	color: white;
 	padding-left: 20px;
 }
 
@@ -40,4 +43,9 @@ body{
 	height: 100vh;
 
 	background-color: black;
+}
+
+.title{
+	padding-left: 5px;
+	padding-bottom: 20px;
 }
