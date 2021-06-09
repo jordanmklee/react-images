@@ -10,9 +10,10 @@ const API_GET_TST = "https://tsmiscwebapi.azurewebsites.net/api/timesheet/GetTim
 function Images(){
 	const [images, setImages] = useState([]);
 	const [display, setDisplay] = useState("Please click on a photo to view");
+	const [viewerIndex, setViewerIndex] = useState(0);
 
 	const handlePhotoClick = (event, obj) => {
-		setDisplay(obj.index)
+		setViewerIndex(obj.index);
 	}
 
 	// Retrieves images from API on load
@@ -58,17 +59,18 @@ function Images(){
 			<div className="main">
 				{(images.length !== 0)
 				?	(	<Viewer
-							visible={true}
 							images={images}
+							activeIndex={viewerIndex}
+							container={document.querySelector(".main")}
+							zoomSpeed={0.75}
+							minScale={1}
+							visible={true}
 							zoomable={false}
 							scalable={false}
 							noImgDetails={true}
 							noClose={true}
 							changeable={false}
-							zoomSpeed={0.75}
-							minScale={1}
-							noNavbar={true}
-							container={document.querySelector(".main")}/>	)
+							noNavbar={true}/>	)
 				:	(	<h1>{display}</h1>	)}
 
 			</div>
