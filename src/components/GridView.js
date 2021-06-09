@@ -42,13 +42,17 @@ function GridView(props){
 					activeIndex={viewerIndex}
 					visible={viewerIsVisible}
 					onClose={handleViewerClose}
+					onMaskClick={handleViewerClose}
 					zoomSpeed={0.75}
 					minScale={1}
 					zoomable={false}
 					scalable={false}
 					noImgDetails={true}
-					changeable={true}
-					noNavbar={true}/>	)
+					noNavbar={true}
+					customToolbar={(toolbars) => {
+						return toolbars.filter((button) => {return button.key !== "reset"} )
+					}}
+					/>	)
 			</Container>
 		</div>
 	)

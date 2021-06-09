@@ -46,8 +46,11 @@ function ListView(props){
 								scalable={false}
 								noImgDetails={true}
 								noClose={true}
-								changeable={false}
-								noNavbar={true}/>	)
+								noNavbar={true}
+                                customToolbar={(toolbars) => {
+                                    return toolbars.filter((button) => {return button.key !== "reset"} )
+                                }}
+                                />	)
 					:	(	<></>	)}
 			</div>
 		</div>
