@@ -9,6 +9,7 @@ const API_GET_TST = "https://tsmiscwebapi.azurewebsites.net/api/timesheet/GetTim
 
 function Images(){
 	const [images, setImages] = useState([]);
+	const [title, setTitle] = useState("");
 	const [viewerIndex, setViewerIndex] = useState(0);
 
 
@@ -24,6 +25,8 @@ function Images(){
 		let search = window.location.search;	// ?app={type}&p1={id}
 		let type = search.substring(5, 8);
 		let id = search.substring(12);
+
+		setTitle(type + " - " + id);
 
 		axios.get((type === "SBS" ? API_GET_SBS : API_GET_TST)
 		+ "/" + id
@@ -51,7 +54,7 @@ function Images(){
 		<div className="page-container">
 			<div className="sidebar">
 				<div className="sidebar-title">
-					<h2>Images</h2>
+					<h2>{title}</h2>
 				</div>
 				{/* Only show gallery if there are images */}
 				{(images.length !== 0)
