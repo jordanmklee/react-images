@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import Gallery from "react-photo-gallery";
+
 import Viewer from "react-viewer";
 
 import axios from "axios";
@@ -63,15 +64,18 @@ function Images(){
 				<h1>{display}</h1>
 				{(images.length !== 0)
 				? (
-				<Viewer
-					visible={true}
-					images={images}
-					zoomable={false}
-					scalable={false}
-					noClose={true}
-					changeable={false}
-					zoomSpeed={0.75}
-					minScale={1}/>
+					<Viewer
+						visible={true}
+						images={images}
+						zoomable={false}
+						scalable={false}
+						noImgDetails={true}
+						noClose={true}
+						changeable={false}
+						zoomSpeed={0.75}
+						minScale={1}
+						
+						container={document.querySelector(".main")}/>
 				)
 				: (<></>)}
 
