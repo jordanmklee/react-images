@@ -11,9 +11,12 @@ function Images(){
 	const [images, setImages] = useState([]);
 	const [viewerIndex, setViewerIndex] = useState(0);
 
+
+	// Show large image in viewer when gallery thumbnail clicked
 	const handlePhotoClick = (event, obj) => {
 		setViewerIndex(obj.index);
 	}
+
 
 	// Retrieves images from API on load
 	useEffect(() => {
@@ -28,11 +31,15 @@ function Images(){
 		.then(res => {
 			let apiImages = [];
 			
-			res.data.Data.forEach(img => {
+			res.data.Data.forEach(pic => {
+				// Image object to retrieve dimensions
+				let img = new Image();
+				img.src = pic.ImageUrl;
+
 				apiImages.push({
-					src: img.ImageUrl,
-					width: 1,
-					height: 1,
+					src: pic.ImageUrl,
+					width: img.naturalWidth,
+					height: img.naturalHeight,
 				})
 			})
 			
@@ -51,11 +58,10 @@ function Images(){
 					? 	(	<Gallery photos={images}
 								columns={1}
 								direction={"column"}
-								margin={10}
+								margin={20}
 								onClick={handlePhotoClick}/>	)
 					:	(<></>)	}
 			</div>
-			
 			
 			<div className="viewer-container">
 				{(images.length !== 0)
@@ -73,7 +79,6 @@ function Images(){
 								changeable={false}
 								noNavbar={true}/>	)
 					:	(	<></>	)}
-
 			</div>
 		</div>
 	)
