@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import Gallery from "react-photo-gallery";
-import Viewer from "react-viewer";
+import GridView from "./GridView";
+import ListView from "./ListView";
 
 import axios from "axios";
 const API_GET_SBS = "https://tsmiscwebapi.azurewebsites.net/api/qb/GetSBSIFPictures";
@@ -10,15 +10,12 @@ const API_GET_TST = "https://tsmiscwebapi.azurewebsites.net/api/timesheet/GetTim
 function Images(){
 	const [images, setImages] = useState([]);
 	const [title, setTitle] = useState("");
-	const [viewerIndex, setViewerIndex] = useState(0);
+	const [gridView, setGridView] = useState(false);
 
-
-	// Show large image in viewer when gallery thumbnail clicked
-	const handlePhotoClick = (event, obj) => {
-		setViewerIndex(obj.index);
+	const handleChangeView = (event) => {
+		setGridView(!gridView);
 	}
-
-
+	
 	// Retrieves images from API on load
 	useEffect(() => {
 		// Parse URL
@@ -51,39 +48,9 @@ function Images(){
 	}, [])
 	
 	return(
-		<div className="page-container">
-			<div className="sidebar">
-				<div className="sidebar-title">
-					<h2>{title}</h2>
-				</div>
-				{/* Only show gallery if there are images */}
-				{(images.length !== 0)
-					? 	(	<Gallery photos={images}
-								columns={1}
-								direction={"column"}
-								margin={20}
-								onClick={handlePhotoClick}/>	)
-					:	(<></>)	}
-			</div>
-			
-			<div className="viewer-container">
-				{(images.length !== 0)
-					?	(	<Viewer
-								images={images}
-								activeIndex={viewerIndex}
-								container={document.querySelector(".viewer-container")}
-								zoomSpeed={0.75}
-								minScale={1}
-								visible={true}
-								zoomable={false}
-								scalable={false}
-								noImgDetails={true}
-								noClose={true}
-								changeable={false}
-								noNavbar={true}/>	)
-					:	(	<></>	)}
-			</div>
-		</div>
+		(gridView)
+			? <GridView/>
+			: <ListView title={title} images={images} handleChangeView={handleChangeView}/>
 	)
 }
 
