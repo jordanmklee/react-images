@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 import Gallery from "react-photo-gallery";
-
 import Viewer from "react-viewer";
 
 import axios from "axios";
@@ -39,45 +38,38 @@ function Images(){
 			
 			setImages(apiImages);
 		})
-
 	}, [])
 	
 	return(
-		<div className="container">
+		<div>
 			<div className="sidebar">
 				<h1>Images</h1>
 				
 				{/* Only show gallery if there are images */}
 				{(images.length !== 0)
-					? ( <Gallery photos={images}
-						columns={1}
-						direction={"column"}
-						onClick={handlePhotoClick}/>
-						
-						)
-					: (<></>) }
-					
+					? 	(	<Gallery photos={images}
+								columns={1}
+								direction={"column"}
+								onClick={handlePhotoClick}/>	)
+					:	(<></>)	}
 			</div>
 			
 			
 			<div className="main">
-				<h1>{display}</h1>
 				{(images.length !== 0)
-				? (
-					<Viewer
-						visible={true}
-						images={images}
-						zoomable={false}
-						scalable={false}
-						noImgDetails={true}
-						noClose={true}
-						changeable={false}
-						zoomSpeed={0.75}
-						minScale={1}
-						
-						container={document.querySelector(".main")}/>
-				)
-				: (<></>)}
+				?	(	<Viewer
+							visible={true}
+							images={images}
+							zoomable={false}
+							scalable={false}
+							noImgDetails={true}
+							noClose={true}
+							changeable={false}
+							zoomSpeed={0.75}
+							minScale={1}
+							noNavbar={true}
+							container={document.querySelector(".main")}/>	)
+				:	(	<h1>{display}</h1>	)}
 
 			</div>
 		</div>
