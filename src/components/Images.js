@@ -31,7 +31,7 @@ function Images(){
 			res.data.Data.forEach(img => {
 				apiImages.push({
 					src: img.ImageUrl,
-					width: 2,
+					width: 1,
 					height: 1,
 				})
 			})
@@ -41,9 +41,11 @@ function Images(){
 	}, [])
 	
 	return(
-		<div>
+		<div className="page-container">
 			<div className="sidebar">
-				<h2>Images</h2>
+				<div className="sidebar-title">
+					<h2>Images</h2>
+				</div>
 				{/* Only show gallery if there are images */}
 				{(images.length !== 0)
 					? 	(	<Gallery photos={images}
@@ -55,22 +57,22 @@ function Images(){
 			</div>
 			
 			
-			<div className="main">
+			<div className="viewer-container">
 				{(images.length !== 0)
-				?	(	<Viewer
-							images={images}
-							activeIndex={viewerIndex}
-							container={document.querySelector(".main")}
-							zoomSpeed={0.75}
-							minScale={1}
-							visible={true}
-							zoomable={false}
-							scalable={false}
-							noImgDetails={true}
-							noClose={true}
-							changeable={false}
-							noNavbar={true}/>	)
-				:	(	<></>	)}
+					?	(	<Viewer
+								images={images}
+								activeIndex={viewerIndex}
+								container={document.querySelector(".viewer-container")}
+								zoomSpeed={0.75}
+								minScale={1}
+								visible={true}
+								zoomable={false}
+								scalable={false}
+								noImgDetails={true}
+								noClose={true}
+								changeable={false}
+								noNavbar={true}/>	)
+					:	(	<></>	)}
 
 			</div>
 		</div>

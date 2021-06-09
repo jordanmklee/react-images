@@ -1,23 +1,43 @@
 html{
 	font-family: "Roboto";
+}
+
+body{
+	margin: 0;
+}
+
+.page-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.sidebar {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 100%;
+	flex: 1;
+	height: 100vh;
+	overflow-y: scroll;
 	background-color: black;
 }
-
-.sidebar{
-	height: 100%;	/* Full height */
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 15%;
-	/* overflow-y: scroll; */
-
-	color: white;
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
 
-.main{
-	height: 100%;
-	position: fixed;
-	top: 0;
-    left: 15%;
-	width: 85%;
+.sidebar-title{
+	color: white;
+	padding: 10px;
+}
+
+.viewer-container{
+	display: flex;
+	flex-direction: column;
+	flex-basis: 100%;
+	flex: 4;
+	height: 100vh;
+
+	background-color: black;
 }
