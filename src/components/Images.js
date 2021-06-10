@@ -12,6 +12,7 @@ function Images(){
 	const [title, setTitle] = useState("");
 	const [gridView, setGridView] = useState(false);
 
+	// Changes from list view (default) to grid view
 	const handleChangeView = (event) => {
 		setGridView(!gridView);
 	}
@@ -46,6 +47,7 @@ function Images(){
 			setImages(apiImages);
 		})
 	}, [])
+	
 	
 	return(
 		(gridView)

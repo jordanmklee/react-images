@@ -6,7 +6,6 @@ import Gallery from "react-photo-gallery";
 import Viewer from "react-viewer";
 
 function ListView(props){
-    
 	const [viewerIndex, setViewerIndex] = useState(0);
     
     // Show large image in viewer when gallery thumbnail clicked
@@ -34,6 +33,7 @@ function ListView(props){
 			</div>
 			
 			<div className="viewer-container">
+				{/* Only show gallery if there are images */}
 				{(props.images.length !== 0)
 					?	(	<Viewer
 								images={props.images}

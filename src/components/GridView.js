@@ -16,15 +16,18 @@ function GridView(props){
 		window.location.reload(false);
 	}
 
+	// Opens viewer overlap on click
 	const handlePhotoClick = (event, obj) => {
 		setViewerIndex(obj.index);
 		setViewerIsVisible(true);
 	}
 
+	// Closes viewer overlap
 	const handleViewerClose = (event) => {
 		setViewerIsVisible(false);
 	}
 	
+
 	return(
 		<div className="page-container">
 			<Container>
