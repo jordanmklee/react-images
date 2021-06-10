@@ -24,28 +24,36 @@ h2{
 	flex-basis: 100%;
 	flex: 1;
 	height: 100vh;
-	overflow-y: scroll;
+	min-width: 300px;
 }
 ::-webkit-scrollbar {
-    width: 0px;
-    background: transparent; /* make scrollbar transparent */
+    width: 3px;
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: rgb(111 , 111, 111);
 }
 
 .sidebar-title{
 	padding-left: 20px;
+	padding-bottom: 40px;
+}
+
+.sidebar-content{
+	overflow-y: scroll;
 }
 
 .viewer-container{
 	display: flex;
 	flex-direction: column;
 	flex-basis: 100%;
-	flex: 4;
+	flex: 6;
 	height: 100vh;
 
 	background-color: black;
 }
 
-.title{
+.grid-title{
 	padding-left: 5px;
-	padding-bottom: 20px;
+	padding-bottom: 40px;
 }

@@ -19,17 +19,19 @@ function ListView(props){
 			<div className="sidebar">
 				<div className="sidebar-title">
 					<h2>{props.title}</h2>
-                    <Button variant="contained" onClick={props.handleChangeView}>Grid View</Button>
+                    <Button variant="contained" onClick={props.handleChangeView} color="primary">Grid View</Button>
 				</div>
 
-				{/* Only show gallery if there are images */}
-				{(props.images.length !== 0)
-					? 	(	<Gallery photos={props.images}
-								columns={1}
-								direction={"column"}
-								margin={20}
-								onClick={handlePhotoClick}/>	)
-					:	(<></>)	}
+				<div className="sidebar-content">
+					{/* Only show gallery if there are images */}
+					{(props.images.length !== 0)
+						? 	(	<Gallery photos={props.images}
+									columns={1}
+									direction={"column"}
+									margin={20}
+									onClick={handlePhotoClick}/>	)
+						:	(<></>)	}
+				</div>
 			</div>
 			
 			<div className="viewer-container">

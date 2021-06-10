@@ -31,9 +31,9 @@ function GridView(props){
 	return(
 		<div className="page-container">
 			<Container>
-				<div className="title">
+				<div className="grid-title">
 					<h2>{props.title}</h2>
-					<Button variant="contained" onClick={refreshPage}>List View</Button>
+					<Button variant="contained" onClick={refreshPage} color="primary">List View</Button>
 				</div>
 
 				<Gallery photos={props.images}
