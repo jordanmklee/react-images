@@ -23,7 +23,7 @@ function ListView(props){
 				</div>
 
 				<div className="sidebar-content">
-					{/* Only show gallery if there are images */}
+					{/* Only show gallery thumbnails if there are images */}
 					{(props.images.length !== 0)
 						? 	(	<Gallery photos={props.images}
 									columns={1}
@@ -35,7 +35,7 @@ function ListView(props){
 			</div>
 			
 			<div className="viewer-container">
-				{/* Only show gallery if there are images */}
+				{/* Only show viewer if there are images */}
 				{(props.images.length !== 0)
 					?	(	<Viewer
 								images={props.images}

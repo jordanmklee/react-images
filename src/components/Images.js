@@ -26,6 +26,7 @@ function Images(){
 
 		setTitle(type + " - " + id);
 
+		// API Get images
 		axios.get((type === "SBS" ? API_GET_SBS : API_GET_TST)
 		+ "/" + id
 		+ "/10000/1")
@@ -33,7 +34,7 @@ function Images(){
 			let apiImages = [];
 			
 			res.data.Data.forEach(pic => {
-				// Image object to retrieve dimensions
+				// Image object used to retrieve dimensions (for Gallery thumbnail aspect ratio rendering)
 				let img = new Image();
 				img.src = pic.ImageUrl;
 
@@ -48,7 +49,7 @@ function Images(){
 		})
 	}, [])
 	
-	
+
 	return(
 		(gridView)
 			? <GridView title={title} images={images}/>
